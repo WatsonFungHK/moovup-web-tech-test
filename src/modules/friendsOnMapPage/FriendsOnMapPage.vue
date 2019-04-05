@@ -5,7 +5,7 @@
       isLoadingFriends...
     </div>
     <div v-else>
-      <div class="friend-card" v-for="friend in friends">
+      <div class="friend-card" v-for="(friend, index) in friends" :key="index">
         <span class="avatar">
           <!-- TODO: use people avatar instead of vue logo -->
           <img class="avatar-img" src="../../assets/logo.png" />
