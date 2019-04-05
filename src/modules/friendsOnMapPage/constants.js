@@ -1,0 +1,1 @@
+export const FRIENDS_LIST_ENDPOINT = 'https://next.json-generator.com/api/json/get/41P1_UhSI';
