@@ -16,14 +16,13 @@
           v-bind:friend="selectedFriend"
         />
       </div>
-      <div v-else>
-        <FriendCard
-          :key="index"
-          v-for="(friend, index) in friends"
-          v-bind:friend="friend"
-          v-bind:handleClick="handleFriendCardClick"
-        />
-      </div>
+      <FriendCard
+        v-if="!selectedFriend"
+        :key="index"
+        v-for="(friend, index) in friends"
+        v-bind:friend="friend"
+        v-bind:handleClick="handleFriendCardClick"
+      />
     </div>
   </div>
 </template>
@@ -50,7 +49,7 @@ export default {
   created() {
     fetch(FRIENDS_LIST_ENDPOINT).then(response => response.json()).then(
       json => {
-        this.friends = json.filter(friend => friend.location.latitude && friend.location.longitude),
+        this.friends = json,
         this.isLoadingFriends = false
       }
     );
@@ -68,7 +67,7 @@ export default {
 
 <style>
   #wrapper {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
   }
 </style>

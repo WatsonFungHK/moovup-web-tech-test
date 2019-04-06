@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <FriendsMap />
+    <FriendsOnMapPage />
   </div>
 </template>
 
 <script>
-import FriendsMap from './modules/friendsOnMapPage';
+import FriendsOnMapPage from './modules/friendsOnMapPage/FriendsOnMapPage';
 
 export default {
   name: 'app',
   components: {
-    FriendsMap
+    FriendsOnMapPage
   }
 }
 </script>
