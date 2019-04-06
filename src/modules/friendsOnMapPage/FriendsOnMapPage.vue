@@ -1,9 +1,7 @@
 <template>
   <div id="wrapper">
-    <!-- Google Map On Construction -->
-    <div v-if="isLoadingFriends">
-      <!-- TODO: use common loading dots -->
-      isLoadingFriends...
+    <div v-if="isLoadingFriends" class="loading-message">
+      is loading friends...
     </div>
     <div v-else>
       <GoogleMap
@@ -12,17 +10,16 @@
         v-bind:handleBackButtonClick="handleBackButtonClick"  
       />
       <div v-if="selectedFriend">
+        <FriendCard v-bind:friend="selectedFriend" />
+      </div>
+      <div v-else>
         <FriendCard
-          v-bind:friend="selectedFriend"
+          :key="index"
+          v-for="(friend, index) in friends"
+          v-bind:friend="friend"
+          v-bind:handleClick="handleFriendCardClick"
         />
       </div>
-      <FriendCard
-        v-if="!selectedFriend"
-        :key="index"
-        v-for="(friend, index) in friends"
-        v-bind:friend="friend"
-        v-bind:handleClick="handleFriendCardClick"
-      />
     </div>
   </div>
 </template>
@@ -69,6 +66,9 @@ export default {
   #wrapper {
     max-width: 600px;
     margin: 0 auto;
+  }
+  .loading-message {
+    text-align: center;
   }
 </style>
 

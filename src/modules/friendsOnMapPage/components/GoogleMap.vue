@@ -8,14 +8,14 @@
       map-type-id="terrain"
     >
       <GmapMarker
-        v-if="!locationError"
+        v-if="hasLatAndLng"
         :position="location"
         :clickable="true"
         :draggable="true"
         @click="center=location"
       />
     </GmapMap>
-    <div v-if="locationError" class="error-message">{{ locationError }} </div>
+    <div v-if="!hasLatAndLng" class="error-message">Can not locate this person</div>
   </div>
 </template>
 
@@ -28,25 +28,23 @@ export default {
     selectedFriend: Object,
     handleBackButtonClick: Function
   },
-  data() {
-    return {
-      locationError: ''
-    };
-  },
   computed: {
+    hasLatAndLng: function() {
+      const { latitude, longitude } = this.selectedFriend.location;
+      return latitude && longitude;
+    },
     location: function() {
       try {
-        const { latitude, longitude } = this.selectedFriend.location;
-        if (!latitude || !longitude) {
-          throw new Error('Can not locate this person');
+        if (!this.hasLatAndLng) {
+          throw new Error('Lack of latitude or/and longitude');
         }
+        const { latitude, longitude } = this.selectedFriend.location;
         return {
           lat: latitude,
           lng: longitude
         };
       } catch (exception) {
         // TODO: log to centralized error log
-        this.locationError = exception.message;
         return DEFAULT_GOOGLE_MAP_POSITION;
       }
     }
