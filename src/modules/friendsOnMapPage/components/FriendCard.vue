@@ -18,7 +18,6 @@
 <script>
 export default {
   name: 'FriendCard',
-  // el: '.friendCard',
   props: {
     friend: Object,
     handleClick: Function
