@@ -4,14 +4,16 @@
       <!-- TODO: use people avatar instead of vue logo -->
       <img class="avatar-img" src="../../../assets/logo.png" />
     </span>
-    <span class="info-wrapper">
+    <span class="basic-info-wrapper">
       <div class="friend-full-name">
         {{ friend.name.first }} {{ friend.name.last }}
       </div>
-      <div class="friend-email">
-        {{ friend.email }}
-      </div>
     </span>
+    <div v-if="isSelected">
+      <div class="friend-detail-info">id: {{ friend._id }}</div>
+      <div class="friend-detail-info">email: {{ friend.email }}</div>
+      <div class="friend-detail-info">picture: {{ friend.picture }}</div>
+    </div>
   </div>
 </template>
 
@@ -20,7 +22,8 @@ export default {
   name: 'FriendCard',
   props: {
     friend: Object,
-    handleClick: Function
+    handleClick: Function,
+    isSelected: Boolean
   }
 }
 </script>
@@ -44,15 +47,15 @@ export default {
     height: 50px;
     width: 50px;
   }
-  .info-wrapper {
+  .basic-info-wrapper {
     vertical-align: middle;
     display: inline-block;
   }
+  .friend-detail-info {
+    margin: 16px 32px;
+  }
   .friend-full-name {
     font-weight: bold;
-  }
-  .friend-email {
-    font-size: 14px;
   }
 </style>
 

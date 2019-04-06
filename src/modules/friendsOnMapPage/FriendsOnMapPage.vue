@@ -10,7 +10,7 @@
         v-bind:handleBackButtonClick="handleBackButtonClick"  
       />
       <div v-if="selectedFriend">
-        <FriendCard v-bind:friend="selectedFriend" />
+        <FriendCard v-bind:friend="selectedFriend" isSelected="true" />
       </div>
       <div v-else>
         <FriendCard
